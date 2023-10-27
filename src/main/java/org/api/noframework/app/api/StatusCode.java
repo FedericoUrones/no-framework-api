@@ -11,7 +11,10 @@ public enum StatusCode {
     ACCEPTED(202),
 
     BAD_REQUEST(400),
-    METHOD_NOT_ALLOWED(405);
+    METHOD_NOT_ALLOWED(405),
+    NOT_FOUND(404),
+    INTERNAL_SERVER_ERROR(500);
 
     private final int code;
+
 }

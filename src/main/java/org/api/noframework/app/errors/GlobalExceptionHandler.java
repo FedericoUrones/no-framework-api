@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import org.api.noframework.app.api.Constants;
 import org.api.noframework.app.api.ErrorResponse;
+import org.api.noframework.app.api.StatusCode;
 
 
 import java.io.IOException;
@@ -33,25 +34,24 @@ public class GlobalExceptionHandler {
     private ErrorResponse getErrorResponse(Throwable throwable, HttpExchange exchange) throws IOException {
         ErrorResponse response = new ErrorResponse();
         if (throwable instanceof InvalidRequestException) {
-            InvalidRequestException exc = (InvalidRequestException) throwable;
-            response.setMessage(exc.getMessage());
-            response.setCode(exc.getCode());
-            exchange.sendResponseHeaders(400, 0);
+            setErrorResponse((ApplicationException) throwable, response);
+            exchange.sendResponseHeaders(StatusCode.BAD_REQUEST.getCode(), 0);
         } else if (throwable instanceof ResourceNotFoundException) {
-            ResourceNotFoundException exc = (ResourceNotFoundException) throwable;
-            response.setMessage(exc.getMessage());
-            response.setCode(exc.getCode());
-            exchange.sendResponseHeaders(404, 0);
+            setErrorResponse((ApplicationException) throwable, response);
+            exchange.sendResponseHeaders(StatusCode.NOT_FOUND.getCode(), 0);
         } else if (throwable instanceof MethodNotAllowedException) {
-            MethodNotAllowedException exc = (MethodNotAllowedException) throwable;
-            response.setMessage(exc.getMessage());
-            response.setCode(exc.getCode());
-            exchange.sendResponseHeaders(405, 0);
+            setErrorResponse((ApplicationException) throwable, response);
+            exchange.sendResponseHeaders(StatusCode.METHOD_NOT_ALLOWED.getCode(), 0);
         } else {
-            response.setCode(500);
+            response.setCode(StatusCode.INTERNAL_SERVER_ERROR.getCode());
             response.setMessage(throwable.getMessage());
-            exchange.sendResponseHeaders(500, 0);
+            exchange.sendResponseHeaders(StatusCode.INTERNAL_SERVER_ERROR.getCode(), 0);
         }
         return response;
+    }
+
+    private void setErrorResponse(ApplicationException exception, ErrorResponse errorResponse) {
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setCode(exception.getCode());
     }
 }
