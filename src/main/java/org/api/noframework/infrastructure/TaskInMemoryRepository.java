@@ -1,4 +1,4 @@
-package org.api.noframework.data;
+package org.api.noframework.infrastructure;
 
 import org.api.noframework.domain.NewTask;
 import org.api.noframework.domain.Task;
