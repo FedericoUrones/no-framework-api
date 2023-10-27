@@ -8,4 +8,10 @@ public interface TaskRepository {
 
     List<Task> getAll();
 
+    Task getById(String id);
+
+    Task update(String taskId, Task task);
+
+    void delete(String id);
+
 }

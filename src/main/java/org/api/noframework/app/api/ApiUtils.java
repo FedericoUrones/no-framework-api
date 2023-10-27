@@ -33,4 +33,12 @@ public class ApiUtils {
             throw new RuntimeException("UTF-8 is a required encoding", e);
         }
     }
+
+    public static String getPathParam(String uri) {
+        String[] result = uri.replaceFirst(Constants.TASKS_PATH + "/", "").split("/");
+        if (result.length > 0) {
+            return result[0];
+        }
+        return null;
+    }
 }

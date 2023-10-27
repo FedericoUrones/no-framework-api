@@ -16,11 +16,8 @@ public class TaskInMemoryRepository implements TaskRepository {
     @Override
     public String create(NewTask newTask) {
         String id = UUID.randomUUID().toString();
-        Task task = Task.builder()
-                .id(id)
-                .description(newTask.getDescription())
-                .build();
-        TASKS_STORE.put(newTask.getDescription(), task);
+        Task task = new Task(id, newTask.getDescription());
+        TASKS_STORE.put(id, task);
 
         return id;
     }
@@ -29,4 +26,22 @@ public class TaskInMemoryRepository implements TaskRepository {
     public List<Task> getAll() {
         return new ArrayList<>(TASKS_STORE.values());
     }
+
+    @Override
+    public Task getById(String id) {
+        return TASKS_STORE.get(id);
+    }
+
+    @Override
+    public Task update(String taskId, Task task) {
+        TASKS_STORE.put(taskId, task);
+        return task;
+    }
+
+    @Override
+    public void delete(String id) {
+        TASKS_STORE.remove(id);
+    }
+
+
 }

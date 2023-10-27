@@ -1,4 +1,13 @@
 package org.api.noframework.app.api.task;
 
-public record TaskResponse(String id, String description){
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TaskResponse{
+    private String id;
+    private String description;
 }

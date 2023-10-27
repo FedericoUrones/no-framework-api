@@ -17,4 +17,15 @@ public class TaskService {
         return taskRepository.getAll();
     }
 
+    public Task getById(String id) {
+        return taskRepository.getById(id);
+    }
+
+    public Task update(String taskId, Task task) {
+        return taskRepository.update(taskId, task);
+    }
+
+    public void delete(String taskId) {
+        taskRepository.delete(taskId);
+    }
 }

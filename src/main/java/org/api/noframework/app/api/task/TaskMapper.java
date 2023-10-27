@@ -1,17 +1,17 @@
 package org.api.noframework.app.api.task;
 
 import org.api.noframework.domain.Task;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Mapper
-public interface TaskMapper {
+public class TaskMapper {
 
-    TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);
+    public TaskResponse taskToTaskResponse(Task task) {
 
-    TaskResponse taskToTaskResponse(Task task);
+        return task != null? new TaskResponse(task.getId(), task.getDescription()) : null;
+    }
 
-    List<TaskResponse> taskToTaskResponse(List<Task> tasks);
+    public List<TaskResponse> taskToTaskResponse(List<Task> tasks) {
+        return tasks.stream().map(this::taskToTaskResponse).collect(Collectors.toList());
+    }
 }

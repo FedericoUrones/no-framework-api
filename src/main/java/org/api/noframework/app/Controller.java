@@ -1,6 +1,7 @@
 package org.api.noframework.app;
 
 import com.sun.net.httpserver.HttpServer;
+import org.api.noframework.app.api.Constants;
 import org.api.noframework.app.api.task.Handler;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ class Controller {
 
         Handler handler = new Handler(Configuration.getTaskService(), Configuration.getObjectMapper(),
                 Configuration.getErrorHandler());
-        server.createContext("/api/tasks", handler::handle);
+        server.createContext(Constants.TASKS_PATH, handler::handle);
 
         server.setExecutor(null); // creates a default executor
         server.start();

@@ -5,7 +5,7 @@ import org.api.noframework.app.errors.GlobalExceptionHandler;
 import org.api.noframework.data.TaskInMemoryRepository;
 import org.api.noframework.domain.TaskService;
 
-class Configuration {
+public class Configuration {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final TaskInMemoryRepository TASK_REPOSITORY = new TaskInMemoryRepository();

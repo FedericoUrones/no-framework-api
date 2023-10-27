@@ -1,12 +1,13 @@
 package org.api.noframework.domain;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
-
-    String id;
-    String description;
+    private String id;
+    private String description;
 }
