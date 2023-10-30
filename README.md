@@ -1,6 +1,6 @@
 # Java No-Framework API
 
-This is an API developed in Java 17 using NO-Framework (like Springboot).
+This is an API developed in Java 17 using NO-Framework (like Springboot). It's a TODO list API.
 
 
 # Libraries used
