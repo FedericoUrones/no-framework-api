@@ -85,7 +85,10 @@ public class Handler extends org.api.noframework.app.api.Handler {
     private ResponseEntity<TaskResponse> doPut(String taskId, InputStream is) {
         TaskRequest request = super.readRequest(is, TaskRequest.class);
         Task modifiedTask = taskService.update(taskId, new Task(request.id(), request.description()));
-
+        if (modifiedTask == null) {
+            throw ApplicationExceptions.notFound(
+                    "Task Id wasn't found: " + taskId).get();
+        }
         return new ResponseEntity<>(taskMapper.taskToTaskResponse(modifiedTask),
                 getHeaders(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON), StatusCode.OK);
     }
