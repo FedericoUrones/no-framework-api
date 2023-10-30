@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TaskInMemoryRepository implements TaskRepository {
 
-    // TODO: Usar sqlite
     private static final Map<String, Task> TASKS_STORE = new ConcurrentHashMap<>();
 
     @Override

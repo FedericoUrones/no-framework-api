@@ -18,7 +18,7 @@ class Controller {
                 Configuration.getErrorHandler());
         server.createContext(Constants.TASKS_PATH, handler::handle);
 
-        server.setExecutor(null); // creates a default executor
+        server.setExecutor(null);
         server.start();
     }
 }

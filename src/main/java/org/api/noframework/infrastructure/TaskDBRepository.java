@@ -104,9 +104,11 @@ public class TaskDBRepository implements TaskRepository {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, task.getDescription());
             statement.setString(2, taskId);
-            statement.executeUpdate();
-            System.out.println("Update executed.");
-            return task;
+            int modifications = statement.executeUpdate();
+            System.out.println("Updated rows: " + modifications);
+            if(modifications == 1) {
+                return task;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
